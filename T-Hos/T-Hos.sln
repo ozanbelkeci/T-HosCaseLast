@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerPanel", "CustomerPanel\CustomerPanel.csproj", "{6286A138-28B4-4F1B-8840-6E33D650F9C6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{07D0A6DB-2212-49EC-AE6B-5E34045F114F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CafeMenu", "CafeMenu\CafeMenu.csproj", "{7CF9B203-C3B6-41B6-A714-5F8343F6926B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6286A138-28B4-4F1B-8840-6E33D650F9C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6286A138-28B4-4F1B-8840-6E33D650F9C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6286A138-28B4-4F1B-8840-6E33D650F9C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6286A138-28B4-4F1B-8840-6E33D650F9C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07D0A6DB-2212-49EC-AE6B-5E34045F114F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07D0A6DB-2212-49EC-AE6B-5E34045F114F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07D0A6DB-2212-49EC-AE6B-5E34045F114F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07D0A6DB-2212-49EC-AE6B-5E34045F114F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CF9B203-C3B6-41B6-A714-5F8343F6926B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CF9B203-C3B6-41B6-A714-5F8343F6926B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CF9B203-C3B6-41B6-A714-5F8343F6926B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CF9B203-C3B6-41B6-A714-5F8343F6926B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A585D64-C59D-4AC7-B478-FA16C00E54DF}
+	EndGlobalSection
+EndGlobal

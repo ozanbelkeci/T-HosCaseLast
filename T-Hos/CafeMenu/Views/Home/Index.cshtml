@@ -1,0 +1,152 @@
+﻿@model CafeMenu.Models.ProductViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">CAFE MENU</h1>
+</div>
+
+<div class="row">
+    <div class="col-lg-4 col-md-8 col-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title d-flex align-items-start justify-content-between">
+                </div>
+                <span class="fw-semibold d-block mb-1">USD</span>
+                <h4 id="usd" class="card-title mb-2"></h4>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-8 col-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title d-flex align-items-start justify-content-between">
+                </div>
+                <span class="fw-semibold d-block mb-1">EUR</span>
+                <h4 id="eur" class="card-title mb-2"></h4>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-8 col-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title d-flex align-items-start justify-content-between">
+                </div>
+                <span class="fw-semibold d-block mb-1">GBP</span>
+                <h4 id="gbp" class="card-title mb-2"></h4>
+
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+<h3 class="pb-1 mb-4 mt-4">Ürünler</h3>
+<div id="products" class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+    @foreach(var item in Model.Products) {
+        <div class="col">
+            <div class="card h-100">
+            <img class="w-100 h-100" src="/productPhotos/@item.ImagePath" alt="Image">
+            <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <p class="card-title">Fiyat Bilgisi: @item.Price TL</p>
+                <p class="card-title">Fiyat Bilgisi: @item.UsdPrice USD</p>
+                <p class="card-title">Fiyat Bilgisi: @item.EurPrice EUR</p>
+                <p class="card-title">Fiyat Bilgisi: @item.GbpPrice GBP</p>
+                <p id="" class="card-title"></p>
+                @foreach(var row in Model.ProductProperties.Where(x => x.ProductId == item.Id).ToList()){
+                <p class="card-text">
+                     @row.Property.Key - @row.Property.Value
+                </p>
+
+                }
+            </div>
+            </div>
+        </div>
+
+    }
+    
+</div>
+
+<script>
+    getCurr();
+    setInterval(getCurr, 10000);
+
+    function getCurr() {
+        $.ajax({
+            url: '@Url.Action("GetCurrencyInfo", "Home")',
+            type: 'POST',
+            dataType: 'json',
+            data: {},
+            success: function (data) {
+                if (data) {
+                    console.log(data);
+                    $("#usd").html("$ " + data.usd);
+                    $("#eur").html("€ " + data.eur);
+                    $("#gbp").html("£ " + data.gbp);
+
+
+                }
+                else {
+                    $(function () {
+                        $('#modal').modal('toggle');
+                    });
+                    Swal.fire({
+                        title: "Hata!",
+                        text: "Bir şeyler ters gitti lütfen tekrar deneyiniz!",
+                        icon: "error"
+                    });
+
+                    return;
+                }
+            }
+        });
+    }
+
+    function getProducts() {
+        $.ajax({
+            url: '@Url.Action("GetProducts", "Home")',
+            type: 'POST',
+            dataType: 'json',
+            data: {},
+            success: function (data) {
+                if (data) {
+                    debugger
+                    var html = "";
+                    for(var item of data.products) {
+                        html += '        <div class="col" >';
+                        html += '            <div class="card h-100" >';
+                        html += '                <img class="w-100 h-100" src = "/productPhotos/'+ item.imagePath +'" alt = "Image" >';
+                        html += '                    <div class="card-body" >';
+                        html += '                        <h5 class="card-title" >' + item.name + '</h5>';
+                        html += '                            < p class="card-title" > Fiyat Bilgisi: ' + item.price + ' TL< /p>';
+                        html += '                                < p id = "" class="card-title" > ' + parseFloat(item.price) * parseFloat($("#usd").html()) + ' USD</p>';
+                        html += '                                < p id = "" class="card-title" > ' + parseFloat(item.price) * parseFloat($("#eur").html()) + ' EUR</p>';
+                        html += '                                < p id = "" class="card-title" > ' + parseFloat(item.price) * parseFloat($("#gbp").html()) + ' GBP</p>';
+                        for(var row of data.productProperties.filter(x => x.productId === item.id)) {
+                            html += '                 <p class="card-text" >';
+                            html += ' '+ row.property.key +' - '+ row.property.value;
+                            html += '                     </p>';
+                        }
+            
+
+            
+                        html += '             </div>';
+                        html += '             < /div>';
+                        html += '             < /div>';
+                    }
+                    $("#products").append(html);
+                }
+                else {
+                    alert("hata");
+
+                    return;
+                }
+            }
+        });
+    }
+</script>
